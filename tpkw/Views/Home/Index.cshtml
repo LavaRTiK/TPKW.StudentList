@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div class="toggle-switch">
+        <div id="select-indicator" class="selection-indicator"></div>
+        <button class="option" id="edit-btn">Edit</button>
+        <button class="option" id="create-btn">Create</button>
+    </div>
+
+    <p  id="nameTable">
+        Create
+    </p>
+    <form>
+        <input visible="false" style="visibility:hidden" class="test-data" id="id" type="tel" placeholder="id" value="">
+        <input class="form-control" id="firstname" type="text" placeholder="firstname" aria-label="default input example">
+        <input class="form-control" id="lastname" type="text" placeholder="lastname" aria-label="default input example">
+        <button class="btn btn-success button-succse" type="button" onclick="onClick()">Ok</button>
+    </form>
+    <div class="list">
+        <ul id="students-list" class="list-group">
+
+        </ul>
+    </div>
+    <div id="rocket-button" class="rocket">
+        <span>Switch Mode</span>
+    </div>
+</div>
+
+<script>
+    // Добавляем обработчики событий для переключения
+const editBtn = document.getElementById("edit-btn");
+const createBtn = document.getElementById("create-btn");
+const selectionIndicator = document.querySelector(".selection-indicator");
+
+// Изначально активный режим - Edit
+editBtn.classList.add("active");
+
+editBtn.addEventListener("click", () => {
+    var nameTable = document.getElementById("nameTable");
+    nameTable.innerHTML = "Edit"
+  selectionIndicator.style.left = "5px"; // Перемещаем подсветку на позицию Edit
+  editBtn.classList.add("active");
+  createBtn.classList.remove("active");
+});
+
+createBtn.addEventListener("click", () => {
+  var nameTable = document.getElementById("nameTable");
+  nameTable.innerHTML = "Create"
+  selectionIndicator.style.left = "105px"; // Перемещаем подсветку на позицию Create
+  createBtn.classList.add("active");
+  editBtn.classList.remove("active");
+});
+
+ createBtn.click();
+
+    let isEditMode = true;
+    const button = document.getElementById("rocket-button");
+
+    button.addEventListener("click", () => {
+        isEditMode = !isEditMode;
+        button.classList.toggle("fly");
+
+        if (isEditMode) {
+            button.innerHTML = "Edit Mode";
+            // логику для режима Edit
+        } else {
+            button.innerHTML = "Create Mode";
+            // логику для режима Create
+        }
+    });
+</script>
